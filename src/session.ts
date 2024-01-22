@@ -66,10 +66,14 @@ function normalizeOptions(args: FetchArgs): FetchWithBrowserOptions | FetchWitho
     if (options.browser === false) {
       options.fetch = options.fetch || true
     }
+    // defaults to fetch
+    if (!options.browser && !options.fetch) {
+      return { url: options.url, fetch: defaultFetchOptions }
+    }
     if (options.fetch === true) {
       return { url: options.url, fetch: defaultFetchOptions }
     }
-    if (options.browser === true || (!options.browser && !options.fetch)) {
+    if (options.browser === true) {
       return { url: options.url, browser: defaultBrowserOptions }
     }
     return options

@@ -5,7 +5,7 @@ import { fetchHTML } from '../src/index.js'
 describe('recipes', () => {
   test('fetch the wallpaper from Bing', async () => {
     const url = 'https://bing.com'
-    const { dom } = await fetchHTML({ url })
+    const { dom } = await fetchHTML(url, { browser: true })
     const img = dom.find('.img_cont')
     ok(img?.backgroundImage.includes('/th?id='))
   })
@@ -22,7 +22,7 @@ describe('recipes', () => {
 
   test('fetch titles from Hacker News', async () => {
     const url = 'https://news.ycombinator.com'
-    const { dom } = await fetchHTML(url, { fetch: true })
+    const { dom } = await fetchHTML(url)
     const titles = dom.findAll('.titleline')
     const news = titles.map(({ text, link }) => [text, link])
     for (const [text, link] of news) {
