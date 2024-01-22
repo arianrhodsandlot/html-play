@@ -1,0 +1,4 @@
+{
+  "extends": "@tsconfig/node-lts",
+  "exclude": ["eslint.config.js"]
+}
