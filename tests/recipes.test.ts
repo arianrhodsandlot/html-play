@@ -2,7 +2,7 @@ import { ok } from 'node:assert'
 import { describe, test } from 'node:test'
 import { fetchHTML } from '../src/index.js'
 
-describe.skip('recipes', () => {
+describe('recipes', () => {
   test('fetch the wallpaper from Bing', async () => {
     const url = 'https://bing.com'
     const { dom } = await fetchHTML({ url })

@@ -25,17 +25,6 @@ export class DOMElement<T extends Element = Element> {
     return this.links[0]
   }
 
-  get rawLink() {
-    if (this.selfRawLink) {
-      return this.selfRawLink
-    }
-    return this.rawLinks[0]
-  }
-
-  get rawLinks() {
-    return this.anchorChildren.map(({ element }) => element.getAttribute('href'))
-  }
-
   get links() {
     return this.anchorChildren.map(({ element: { href } }) => href)
   }
@@ -61,7 +50,10 @@ export class DOMElement<T extends Element = Element> {
 
   get backgroundImage() {
     // @ts-expect-error the actual type of element is unclear here
-    const backgroundImage = this.element?.style?.backgroundImage ?? ''
+    const backgroundImage = this.element?.style?.backgroundImage ?? this.element?.style?.background ?? ''
+    if (!backgroundImage) {
+      return ''
+    }
     const backgroundImageURL = backgroundImage.slice(4, -1).replaceAll(/["']/g, '')
     return this.resolveURL(backgroundImageURL)
   }
@@ -80,13 +72,6 @@ export class DOMElement<T extends Element = Element> {
     return ''
   }
 
-  private get selfRawLink() {
-    if (this.element.tagName === 'A') {
-      return (this.element as unknown as HTMLAnchorElement).getAttribute('href') || ''
-    }
-    return ''
-  }
-
   private get anchorChildren() {
     return this.findAll<HTMLAnchorElement>('a')
   }
@@ -96,7 +81,7 @@ export class DOMElement<T extends Element = Element> {
   }
 
   getAttribute(qualifiedName: string) {
-    return this.element.getAttribute(qualifiedName)
+    return this.element.getAttribute(qualifiedName) ?? undefined
   }
 
   find<T extends Element = Element>(selector: string, options: { containing?: string } = {}) {
