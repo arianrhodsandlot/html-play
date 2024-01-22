@@ -1,16 +1,25 @@
 {
   "name": "fetch-html",
-  "type": "module",
+  "description": "Fetch and parse dynamic HTMLs with Node.js like a boss 🕶.",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "type": "module",
+  "main": "./dist/src/index.js",
   "scripts": {
+    "build": "tsc",
     "dev": "tsx --test --test-only --no-deprecation",
     "test": "tsx --test --no-deprecation"
   },
+  "module": "./dist/src/index.js",
+  "types": "./dist/src/index.d.ts",
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": {
+    "name": "arianrhodsandlot",
+    "email": "theguidanceofawhitetower@gmail.com"
+  },
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
   "devDependencies": {
     "@arianrhodsandlot/eslint-config": "0.8.5",
     "@tsconfig/node-lts": "20.1.1",

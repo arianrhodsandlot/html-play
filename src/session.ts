@@ -168,3 +168,5 @@ export class Session {
     return new Response({ url, status, content, dom, rawFetchResponse: response })
   }
 }
+
+export const fetchHTML = Session.create()

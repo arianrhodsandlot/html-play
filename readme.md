@@ -9,7 +9,6 @@ Fetch and parse dynamic HTMLs with Node.js like a boss 🕶.
 - CSS Selectors.
 - Intuitive APIs for extracting contents.
 
-
 ## Appetizer
 ```js
 import { fetchHTML } from 'fetch-html'

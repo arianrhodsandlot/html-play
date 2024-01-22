@@ -1,5 +1,2 @@
-import { Session } from './session.js'
-
+export { fetchHTML } from './session.js'
 export { JSDOM } from 'jsdom'
-
-export const fetchHTML = Session.create()
