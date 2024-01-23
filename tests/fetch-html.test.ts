@@ -2,9 +2,9 @@ import { deepEqual, equal, notEqual, ok } from 'node:assert'
 import { type Server, createServer } from 'node:http'
 import { describe, test } from 'node:test'
 import serveHandler from 'serve-handler'
-import { fetchHTML } from '../src/index.js'
+import { playHTML } from '../src/index.js'
 
-describe('fetch-html', () => {
+describe('play-html', () => {
   const testLinks = {
     unsplash: 'http://localhost:3000/tests/html/unsplash',
     node: 'http://localhost:3000/tests/html/node',
@@ -24,26 +24,26 @@ describe('fetch-html', () => {
   })
 
   test('text and rawText', async () => {
-    const { dom } = await fetchHTML(testLinks.unsplash)
+    const { dom } = await playHTML(testLinks.unsplash)
     const element = dom.find('.irJsV')
     equal(element?.text, 'baconplancrowd of peopleantibioticsroleanalytics')
     equal(element?.rawText, 'baconplancrowd of peopleantibioticsroleanalytics')
   })
 
   test('html', async () => {
-    const { dom } = await fetchHTML(testLinks.node)
+    const { dom } = await playHTML(testLinks.node)
     equal(dom.find('h2')?.html, '<h2>Download Node.js®</h2>')
   })
 
   test('link', async () => {
-    const { dom } = await fetchHTML(testLinks.node)
+    const { dom } = await playHTML(testLinks.node)
     const anchor = dom.find('a')
     equal(anchor?.link, 'http://localhost:3000/en')
     equal(anchor?.getAttribute('href'), '/en')
   })
 
   test('links', async () => {
-    const { dom } = await fetchHTML(testLinks.node)
+    const { dom } = await playHTML(testLinks.node)
     const container = dom.find('.container')
     deepEqual(container?.links, [
       'http://localhost:3000/en',
@@ -60,7 +60,7 @@ describe('fetch-html', () => {
   })
 
   test('getAttribute', async () => {
-    const { dom } = await fetchHTML(testLinks.unsplash)
+    const { dom } = await playHTML(testLinks.unsplash)
     const input = dom.find('input[type=search]')
     equal(input?.getAttribute('required'), '')
     equal(input?.getAttribute('xxx'), undefined)
@@ -69,7 +69,7 @@ describe('fetch-html', () => {
   })
 
   test('find', async () => {
-    const { dom } = await fetchHTML(testLinks.unsplash)
+    const { dom } = await playHTML(testLinks.unsplash)
     const div = dom.find('div')
     ok(div)
     const xxx = dom.find('xxx')
@@ -77,7 +77,7 @@ describe('fetch-html', () => {
   })
 
   test('findAll', async () => {
-    const { dom } = await fetchHTML(testLinks.unsplash)
+    const { dom } = await playHTML(testLinks.unsplash)
     const div = dom.findAll('div')
     equal(div.length, 817)
     const xxx = dom.findAll('xxx')
@@ -85,7 +85,7 @@ describe('fetch-html', () => {
   })
 
   test('link and image with base tag', async () => {
-    const { dom } = await fetchHTML(testLinks.base)
+    const { dom } = await playHTML(testLinks.base)
     const anchor = dom.find('a')
     equal(anchor?.link, 'http://example.com/link')
     const img = dom.find('img')
@@ -95,7 +95,7 @@ describe('fetch-html', () => {
   })
 
   test('images', async () => {
-    const { dom } = await fetchHTML(testLinks.node)
+    const { dom } = await playHTML(testLinks.node)
     deepEqual(dom.images, [
       'http://localhost:3000/static/images/logo.svg',
       'http://localhost:3000/static/images/light-mode.svg',
@@ -105,13 +105,13 @@ describe('fetch-html', () => {
   })
 
   test('redirect', async () => {
-    const { url } = await fetchHTML(testLinks.redirect, { browser: true })
+    const { url } = await playHTML(testLinks.redirect, { browser: true })
     equal(url, 'http://localhost:3000/tests/html/node-js')
     notEqual(url, testLinks.redirect)
   })
 
   test('redirect should not work with fetch option', async () => {
-    const { url } = await fetchHTML(testLinks.redirect)
+    const { url } = await playHTML(testLinks.redirect)
     equal(url, testLinks.redirect)
   })
 })
