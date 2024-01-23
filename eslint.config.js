@@ -1,1 +1,1 @@
-export { config as default } from '@arianrhodsandlot/eslint-config'
+module.exports = require('@arianrhodsandlot/eslint-config').config
