@@ -1,12 +1,31 @@
-# HTML-Play
+<h1 align="center">HTML-Play</h1>
 
-Fetch and parse web pages with Node.js like a boss 🕶.
+<p align="center">
+  <a href="https://www.npmjs.com/package/html-play" title="HTML-Play on NPM">
+    <img width="73" height="28" src="https://img.shields.io/badge/npm-CB3837.svg?style=for-the-badge&logo=npm&logoColor=white" alt="NPM badge" />
+  </a>
+  <a href="https://github.com/arianrhodsandlot/html-play" title="HTML-Play on GitHub">
+    <img width="95" height="28" src="https://img.shields.io/badge/GitHub-181717.svg?style=for-the-badge&logo=GitHub&logoColor=white" alt="GitHub badge" />
+  </a>
+</p>
+
+<p align="center">
+  Fetch and parse web pages with Node.js like a boss 🕶.
+</p>
+
+<p align="center">
+  <img src="docs/screenshot.png" alt="screenshot" />
+</p>
 
 ## Features
-+ **Full JavaScript support!** (Using Chromium by default, thanks to [Playwright](https://playwright.dev/)).
++ Intuitive APIs for extracting useful contents like links and images.
 + CSS selectors.
 + Mocked user-agent (like a real web browser).
-+ Intuitive APIs for extracting useful contents like links and images.
++ Full JavaScript support.
+  ```js
+  await htmlPlay(url, { browser: true })
+  ```
+  Using Chromium under the hood by default, thanks to [Playwright](https://playwright.dev)
 
 ## Recipes
 + Grab a list of all links and images on the page.
@@ -60,7 +79,7 @@ Fetch and parse web pages with Node.js like a boss 🕶.
   // Search for images of "flower" with Google
   import { htmlPlay } from 'html-play'
 
-  const { dom } = await htmlPlay('https://www.google.com/search?&q=flower&tbm=isch')
+  const { dom } = await htmlPlay('https://www.google.com/search?&q=flower&tbm=isch', { browser: true })
   // Filtering is still needed if you want this work...
   console.log(dom.images)
   ```
@@ -89,7 +108,7 @@ npx playwright install chromium
 + ### Methods
   #### `htmlPlay`
 
-  Fetch a certain URL and return response and parsed DOM.
+  Fetch a certain URL and return its response with the parsed DOM.
 
   ##### Example:
   ```js
@@ -117,7 +136,7 @@ npx playwright install chromium
 
       Default: `true`
 
-      If set to `true`, we will use the Fetch API to load the requested URL. You can also specify the options for the Fetch API by passing an `object` here.
+      If set to `true`, we will use [the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch) to load the requested URL. You can also specify the options for [the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch) by passing an `object` here.
 
       + `fetcher` (Optional)
 
@@ -143,13 +162,13 @@ npx playwright install chromium
 
         Type: `object`
 
-        The Playwright Browser instance to use.
+        [The Playwright Browser instance](https://playwright.dev/docs/api/class-browser) to use.
 
       + `page` (Optional)
 
         Type: `object`
 
-        The Playwright Page instance to use.
+        [The Playwright Page instance](https://playwright.dev/docs/api/class-page) to use.
 
       + `launchOptions` (Optional)
 
@@ -164,7 +183,7 @@ npx playwright install chromium
         A custom hook function that will be called after the page is loaded. `page` and `browser` can be accessed here as the properties of its first parameter to interact with the page.
 
   ##### Returns:
-  A `Promise` of [`Response`](#Response) instance (see below).
+  A `Promise` of the [`Response`](#Response) instance (see below).
 
 + ### Classes
   #### `Response`
@@ -203,7 +222,7 @@ npx playwright install chromium
 
     Type: `object`
 
-    The raw response object returned by the Fetch API.
+    The raw response object returned by [the Fetch API](https://developer.mozilla.org/en-US/docs/Web/API/fetch).
 
   #### `DOMElement`
   ##### Properties
@@ -315,9 +334,8 @@ npx playwright install chromium
 
       Returns element's first attribute whose qualified name is qualifiedName, and `undefined` if there is no such attribute otherwise.
 
-
 ## Credits
-This project is highly inspired by the fabulous Python library [Requests-HTML](https://github.com/psf/requests-html).
+This project is highly inspired by another fabulous library [Requests-HTML](https://github.com/psf/requests-html) for Python.
 
 ## License
 [MIT](licenses)
