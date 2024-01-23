@@ -1,4 +1,5 @@
 import { type Browser, type LaunchOptions, type Page, chromium } from 'playwright'
+import { defaultFetchUserAgent } from './lib/constants.js'
 import { buildDOM } from './lib/dom.js'
 import { Response } from './response.js'
 
@@ -46,7 +47,9 @@ type FetchArgs =
       ),
     ]
 
-const defaultFetchOptions = {}
+const defaultFetchOptions: FetchWithoutBrowserOptions['fetch'] = {
+  fetchInit: { headers: { 'User-Agent': defaultFetchUserAgent } },
+}
 
 const defaultBrowserOptions = {}
 
