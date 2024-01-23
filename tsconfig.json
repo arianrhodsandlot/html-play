@@ -2,7 +2,8 @@
   "extends": "@tsconfig/node-lts",
   "exclude": ["eslint.config.js", "dist", "tests"],
   "compilerOptions": {
-    "outDir": "dist",
-    "declaration": true
+    "outDir": "dist/types",
+    "declaration": true,
+    "emitDeclarationOnly": true
   }
 }
