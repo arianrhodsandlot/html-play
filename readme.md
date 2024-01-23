@@ -7,18 +7,20 @@ Fetch and parse web pages with Node.js like a boss 🕶.
 
 ## Features
 + **Full JavaScript support!** (Using Chromium by default, thanks to [Playwright](https://playwright.dev/)).
-+ CSS Selectors.
++ CSS selectors.
 + Mocked user-agent (like a real web browser).
 + Intuitive APIs for extracting useful contents like links and images.
 
 ## Recipes
-+ Grab a list of all links on the page.
++ Grab a list of all links and images on the page.
   ```js
   import { htmlPlay } from 'html-play'
 
   const { dom } = await htmlPlay('https://nodejs.org')
-  // Will print all links on the page
+  // Will print all link URLs on the page
   console.log(dom.links)
+  // Will print all image URLs on the page
+  console.log(dom.images)
   ```
 
 + Select an element with a CSS selector.
@@ -26,8 +28,9 @@ Fetch and parse web pages with Node.js like a boss 🕶.
   import { htmlPlay } from 'html-play'
 
   const { dom } = await htmlPlay('https://nodejs.org')
+  const intro = dom.find('#home-intro', { containing: 'Node' })
   // Will print: 'Node.js® is an open-source, cross-platform...'
-  console.log(dom.find('#home-intro').text)
+  console.log(intro.text)
   ```
 
 <details>
@@ -105,53 +108,61 @@ npx playwright install chromium
 
     The URL to fetch.
 
-  + `options`
+  + `options` (Optional)
 
     Type: `object`
 
     Default: `{ fetch: true }`
 
-    + `fetch`
+    + `fetch` (Optional)
 
       Type: `boolean | object`
 
+      Default: `true`
+
       If set to `true`, we will use the Fetch API to load the requested URL. You can also specify the options for the Fetch API by passing an `object` here.
 
-      + `fetcher`
+      + `fetcher` (Optional)
 
         Type: `function`
 
         The fetch function we are going to use. We can pass a polyfill here.
 
-      + `fetchInit`
+      + `fetchInit` (Optional)
 
         Type: `function`
 
         The fetch parameters passed to the fetch function. See [fetch#options](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options). You can set HTTP headers or cookies here.
 
-    + `browser`
+    + `browser` (Optional)
 
       Type: `boolean | object`
 
+      Default: `false`
+
       If set to `true`, we will use Playwright to load the requested URL. You can also specify the options for Playwright by passing an `object` here.
 
-      + `browser`
+      + `browser` (Optional)
+
+        Type: `object`
 
         The Playwright Browser instance to use.
 
-      + `page`
+      + `page` (Optional)
+
+        Type: `object`
 
         The Playwright Page instance to use.
 
-      + `launchOptions`
+      + `launchOptions` (Optional)
 
         The `launchOptions` passed to Playwright when we are launching the browser. See [BrowserType#browser-type-launch](https://playwright.dev/docs/api/class-browsertype#browser-type-launch)
 
-      + `beforeNavigate`
+      + `beforeNavigate` (Optional)
 
         A custom hook function that will be called before the page is loaded. `page` and `browser` can be accessed here as the properties of its first parameter to interact with the page.
 
-      + `afterNavigate`
+      + `afterNavigate` (Optional)
 
         A custom hook function that will be called after the page is loaded. `page` and `browser` can be accessed here as the properties of its first parameter to interact with the page.
 
@@ -163,25 +174,37 @@ npx playwright install chromium
   ##### Properties
   + `url`
 
+    Type: `string`
+
     The URL of the response. If the response is redirected from another URL, the value will be the final redirected URL.
 
   + `status`
+
+    Type: `number`
 
     The HTTP status code of the response.
 
   + `content`
 
+    Type: `string`
+
     The response content as a plain string.
 
   + `dom`
+
+    Type: `object`
 
     The parsed root DOM. See [`DOMElement`](#DOMElement).
 
   + `rawBrowserResponse`
 
+    Type: `object`
+
     The raw response object returned by Playwright.
 
   + `rawFetchResponse`
+
+    Type: `object`
 
     The raw response object returned by the Fetch API.
 
@@ -189,37 +212,55 @@ npx playwright install chromium
   ##### Properties
   + `html`
 
+    Type: `string`
+
     The "[`outerHTML`](https://developer.mozilla.org/en-US/docs/Web/API/Element/outerHTML)" of this element.
 
   + `link`
+
+    Type: `string`
 
     If the element is an [anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a), this will be the absolute value of the element's link, or it will be an empty string.
 
   + `links`
 
+    Type: `string[]`
+
     All the [anchor elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) inside this element.
 
   + `text`
+
+    Type: `string`
 
     The text of the element with whitespaces stripped.
 
   + `rawText`
 
+    Type: `string`
+
     The original text of the element.
 
   + `image`
+
+    Type: `string`
 
     If the element is an [image embed element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), this will be the absolute URL of the element's image, or it will be an empty string.
 
   + `images`
 
+    Type: `string[]`
+
     All the image URLs inside this element.
 
   + `backgroundImage`
 
+    Type: `string`
+
     The background image source extracted from the element's inline style.
 
   + `element`
+
+    Type: `object`
 
     The corresponding `JSDOM` element object.
 
@@ -231,15 +272,17 @@ npx playwright install chromium
     ##### Parameters
     + `selector`
 
-      CSS Selector to use.
-
       Type: `string`
 
-    + `options`
+      The CSS selector to use.
+
+    + `options` (Optional)
 
       Type: `object`
 
-      + `containing`
+      + `containing` (Optional)
+
+        Type: `string`
 
         Check if the element contains the specified substring.
 
@@ -251,15 +294,17 @@ npx playwright install chromium
     ##### Parameters
     + `selector`
 
-      CSS Selector to use.
-
       Type: `string`
 
-    + `options`
+      The CSS selector to use.
+
+    + `options` (Optional)
 
       Type: `object`
 
-      + `containing`
+      + `containing` (Optional)
+
+        Type: `string`
 
         Check if the element contains the specified substring.
 
