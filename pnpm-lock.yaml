@@ -9,11 +9,6 @@ dependencies:
     specifier: ^24.0.0
     version: 24.0.0
 
-optionalDependencies:
-  playwright:
-    specifier: ^1.41.1
-    version: 1.41.1
-
 devDependencies:
   '@arianrhodsandlot/eslint-config':
     specifier: 0.8.5
@@ -42,6 +37,9 @@ devDependencies:
   eslint:
     specifier: 8.56.0
     version: 8.56.0
+  playwright:
+    specifier: 1.41.1
+    version: 1.41.1
   serve-handler:
     specifier: 6.1.5
     version: 6.1.5
@@ -2204,7 +2202,7 @@ packages:
     engines: {node: ^8.16.0 || ^10.6.0 || >=11.0.0}
     os: [darwin]
     requiresBuild: true
-    dev: false
+    dev: true
     optional: true
 
   /fsevents@2.3.3:
@@ -3324,8 +3322,7 @@ packages:
     engines: {node: '>=16'}
     hasBin: true
     requiresBuild: true
-    dev: false
-    optional: true
+    dev: true
 
   /playwright@1.41.1:
     resolution: {integrity: sha512-gdZAWG97oUnbBdRL3GuBvX3nDDmUOuqzV/D24dytqlKt+eI5KbwusluZRGljx1YoJKZ2NRPaeWiFTeGZO7SosQ==}
@@ -3336,8 +3333,7 @@ packages:
       playwright-core: 1.41.1
     optionalDependencies:
       fsevents: 2.3.2
-    dev: false
-    optional: true
+    dev: true
 
   /pluralize@8.0.0:
     resolution: {integrity: sha512-Nc3IT5yHzflTfbjgqWcCPpo7DaKy4FnpB0l/zCAW0Tc7jxAiuqSxHasntB3D7887LSrA93kDJ9IXovxJYxyLCA==}
