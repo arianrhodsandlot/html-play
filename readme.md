@@ -17,7 +17,8 @@ Fetch and parse web pages with Node.js like a boss 🕶.
   // Will print all links on the page
   console.log(dom.links)
   ```
-+ Select an element with a CSS Selector
+
++ Select an element with a CSS selector.
   ```js
   import { fetchHTML } from 'fetch-html'
 
@@ -25,6 +26,10 @@ Fetch and parse web pages with Node.js like a boss 🕶.
   // Will print: 'Node.js® is an open-source, cross-platform...'
   console.log(dom.find('#home-intro').text)
   ```
+
+<details>
+  <summary>Expand to view more recipes.</summary>
+
 + Let's grab some wallpapers from unsplash.
   ```js
   import { fetchHTML } from 'fetch-html'
@@ -56,12 +61,23 @@ Fetch and parse web pages with Node.js like a boss 🕶.
   // Filtering is still needed if you want this work...
   console.log(dom.images)
   ```
++ Send requests with custom cookies.
+  ```js
+  import { fetchHTML } from '../src/index.js'
+
+  const { dom } = await fetchHTML('https://httpbin.org/cookies', {
+    fetch: { fetchInit: { headers: { Cookie: 'a=1; b=2;' } } },
+  })
+  // Will print { "cookies": { "a": "1", "b": "2" } }
+  console.log(dom.text)
+  ```
+</details>
 
 ## Installation
 ```sh
 npm i fetch-html
 ```
-If you want to use a browser to "run" the page before parsing, we'll need to install Chromium with Playwright.
+If you want to use a browser to "run" the page before parsing, you'll need to install Chromium with Playwright.
 ```sh
 npx playwright install chromium
 ```
@@ -108,7 +124,7 @@ npx playwright install chromium
 
         Type: `function`
 
-        The fetch parameters passed to the fetch function. See [fetch#options](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options).
+        The fetch parameters passed to the fetch function. See [fetch#options](https://developer.mozilla.org/en-US/docs/Web/API/fetch#options). You can set HTTP headers or cookies here.
 
     + `browser`
 
@@ -130,14 +146,14 @@ npx playwright install chromium
 
       + `beforeNavigate`
 
-        A custom hook function that will be called before the page is loaded.
+        A custom hook function that will be called before the page is loaded. `page` and `browser` can be accessed here as the properties of its first parameter to interact with the page.
 
       + `afterNavigate`
 
-        A custom hook function that will be called after the page is loaded.
+        A custom hook function that will be called after the page is loaded. `page` and `browser` can be accessed here as the properties of its first parameter to interact with the page.
 
   ##### Returns:
-  A `Promise` of `Response` instance (see below).
+  A `Promise` of [`Response`](#Response) instance (see below).
 
 + ### Classes
   #### `Response`
@@ -156,7 +172,7 @@ npx playwright install chromium
 
   + `dom`
 
-    The parsed root DOM. See `DOMElement`.
+    The parsed root DOM. See [`DOMElement`](#DOMElement).
 
   + `rawBrowserResponse`
 
@@ -174,11 +190,11 @@ npx playwright install chromium
 
   + `link`
 
-    If the element is an anchor element, this will be the absolute value of the anchor element's link, or it will be an empty string.
+    If the element is an [anchor element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a), this will be the absolute value of the element's link, or it will be an empty string.
 
   + `links`
 
-    All the links inside this element.
+    All the [anchor elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a) inside this element.
 
   + `text`
 
@@ -186,15 +202,15 @@ npx playwright install chromium
 
   + `rawText`
 
-    The text of the element with whitespaces stripped.
+    The original text of the element.
 
   + `image`
 
-    If the element is an image element, this will be the absolute value of the image element's source, or it will be an empty string.
+    If the element is an [image embed element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), this will be the absolute URL of the element's image, or it will be an empty string.
 
   + `images`
 
-    All the image sources inside this element.
+    All the image URLs inside this element.
 
   + `backgroundImage`
 
