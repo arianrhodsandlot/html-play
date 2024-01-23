@@ -24,10 +24,16 @@ describe('html-play', () => {
   })
 
   test('text and rawText', async () => {
-    const { dom } = await htmlPlay(testLinks.unsplash)
-    const element = dom.find('.irJsV')
-    equal(element?.text, 'baconplancrowd of peopleantibioticsroleanalytics')
-    equal(element?.rawText, 'baconplancrowd of peopleantibioticsroleanalytics')
+    const { dom } = await htmlPlay(testLinks.node)
+    const element = dom.find('#home-intro')
+    equal(
+      element?.text,
+      'Node.js® is an open-source, cross-platform JavaScript runtime environment. Download Node.js® 20.11.0 LTSRecommended For Most UsersOther DownloadsChangelogAPI Docs 21.6.0 CurrentLatest FeaturesOther DownloadsChangelogAPI Docs For information about supported releases, see the release schedule.',
+    )
+    equal(
+      element?.rawText,
+      'Node.js® is an open-source, cross-platform JavaScript runtime environment.\n  \n  Download Node.js®\n  20.11.0 LTSRecommended For Most UsersOther DownloadsChangelogAPI Docs\n  21.6.0 CurrentLatest FeaturesOther DownloadsChangelogAPI Docs\n  For information about supported releases, see the release schedule.',
+    )
   })
 
   test('html', async () => {

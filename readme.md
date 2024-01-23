@@ -249,7 +249,7 @@ npx playwright install chromium
 
     Type: `string`
 
-    The text of the element with whitespaces stripped.
+    The text of the element with whitespaces and linebreaks stripped.
 
   + `rawText`
 

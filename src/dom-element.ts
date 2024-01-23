@@ -34,7 +34,9 @@ export class DOMElement<T extends Element = Element> {
   }
 
   get text() {
-    return this.rawText.replaceAll(/\s\s+/g, ' ').trim()
+    const text1 = this.rawText.replaceAll(/\s\s+/g, ' ')
+    const text2 = text1.replaceAll(/\s/g, ' ')
+    return `${text2.trim()}`
   }
 
   get image() {
@@ -97,7 +99,7 @@ export class DOMElement<T extends Element = Element> {
     }
   }
 
-  findAll<T extends Element = Element>(selector: string, options: { containing?: string } = {}) {
+  findAll<T extends Element = Element>(selector: string, options: { containing?: string } = {}): DOMElement<T>[] {
     const { dom, element, url, baseURL } = this
     const { containing } = options
 
