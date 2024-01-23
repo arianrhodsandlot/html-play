@@ -213,6 +213,12 @@ npx playwright install chromium
 
     The parsed root DOM. See [`DOMElement`](#DOMElement).
 
+  + `json`
+
+    Type: `object | undefined`
+
+    The parsed response JSON. If the response is not a valid JSON, it will be `undefined`.
+
   + `rawBrowserResponse`
 
     Type: `object`

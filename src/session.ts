@@ -1,6 +1,5 @@
 import { type Browser, type LaunchOptions, type Page } from 'playwright'
 import { defaultFetchUserAgent } from './lib/constants.js'
-import { buildDOM } from './lib/dom.js'
 import { Response } from './response.js'
 
 type SessionFunction = Session & Session['fetch']
@@ -154,6 +153,7 @@ export class Session {
 
     const url = page.url()
     const status = response?.status() ?? 0
+    const initialContent = await response?.text()
     const content = await page.content()
 
     if (needClosePage) {
@@ -163,8 +163,7 @@ export class Session {
       await browser.close()
     }
 
-    const dom = buildDOM({ url, content })
-    return new Response({ url, status, content, dom, rawBrowserResponse: response ?? undefined })
+    return new Response({ url, status, initialContent, content, rawBrowserResponse: response ?? undefined })
   }
 
   private async fetchWithoutBrowser(options: FetchWithoutBrowserOptions) {
@@ -172,8 +171,7 @@ export class Session {
     const response = await fetcher(options.url, options.fetch.fetchInit)
     const { url, status } = response
     const content = await response.text()
-    const dom = buildDOM({ url, content })
-    return new Response({ url, status, content, dom, rawFetchResponse: response })
+    return new Response({ url, status, content, rawFetchResponse: response })
   }
 }
 

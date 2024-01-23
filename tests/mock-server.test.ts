@@ -4,12 +4,13 @@ import { describe, test } from 'node:test'
 import serveHandler from 'serve-handler'
 import { htmlPlay } from '../src/index.js'
 
-describe('html-play', () => {
+describe.only('html-play', () => {
   const testLinks = {
     unsplash: 'http://localhost:3000/tests/html/unsplash',
     node: 'http://localhost:3000/tests/html/node',
     redirect: 'http://localhost:3000/tests/html/redirect',
     base: 'http://localhost:3000/tests/html/base',
+    json: 'http://localhost:3000/tests/html/json.json',
   }
 
   let server: Server
@@ -119,5 +120,14 @@ describe('html-play', () => {
   test('redirect should not work with fetch option', async () => {
     const { url } = await htmlPlay(testLinks.redirect)
     equal(url, testLinks.redirect)
+  })
+
+  test.only('json', async () => {
+    const { json: json1 } = await htmlPlay(testLinks.json)
+    deepEqual(json1, { a: 1 })
+    const { json: json2 } = await htmlPlay(testLinks.json, { browser: true })
+    deepEqual(json2, { a: 1 })
+    const { json: json3 } = await htmlPlay(testLinks.node)
+    equal(json3, undefined)
   })
 })
