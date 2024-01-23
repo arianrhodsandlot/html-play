@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  Fetch and parse web pages with Node.js like a boss 🕶.
+  Fetch and parse web pages with Node.js like a boss 🕶
 </p>
 
 <p align="center">

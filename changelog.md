@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## 1.2.2 - 2024-01-23
+### Fixed
+- Remove all linebreaks from `text`
+
 ## 1.2.1 - 2024-01-23
 ### Added
 - Hello
