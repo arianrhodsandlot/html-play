@@ -1,5 +1,5 @@
 {
-  "name": "play-html",
+  "name": "html-play",
   "description": "Fetch and parse dynamic HTMLs with Node.js like a boss 🕶.",
   "version": "1.0.0",
   "type": "module",

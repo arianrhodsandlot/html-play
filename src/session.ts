@@ -176,4 +176,4 @@ export class Session {
   }
 }
 
-export const playHTML = Session.create()
+export const htmlPlay = Session.create()
