@@ -1,6 +1,9 @@
-# html-play
+# HTML-Play
 
 Fetch and parse web pages with Node.js like a boss 🕶.
+
+> [!tip]
+> This package is pure ESM. It cannot be `require()`'d from CommonJS.
 
 ## Features
 + **Full JavaScript support!** (Using Chromium by default, thanks to [Playwright](https://playwright.dev/)).
