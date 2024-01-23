@@ -7,6 +7,7 @@
   "scripts": {
     "build": "tsc",
     "dev": "tsx --test --test-only --no-deprecation",
+    "lint": "eslint .",
     "test": "tsx --test --no-deprecation"
   },
   "module": "./dist/src/index.js",
