@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img src="docs/screenshot.png" alt="screenshot" />
+  <img width="500" src="docs/screenshot.png" alt="screenshot" />
 </p>
 
 ## Features
@@ -25,7 +25,7 @@
   ```js
   await htmlPlay(url, { browser: true })
   ```
-  Using Chromium under the hood by default, thanks to [Playwright](https://playwright.dev)
+  Using Chromium under the hood by default, thanks to [Playwright](https://playwright.dev).
 
 ## Recipes
 + Grab a list of all links and images on the page.
