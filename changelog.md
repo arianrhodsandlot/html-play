@@ -7,22 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## 1.2.0 - 2024-01-23
-### Fixed
-- Fix module type
-
-## 1.1.1 - 2024-01-23
-### Fixed
-- Fix module type
-
-## 1.1.0 - 2024-01-23
+## 1.2.1 - 2024-01-23
 ### Added
-- Add support for CommonJS
-
-## 1.0.1 - 2024-01-23
-### Fixed
-- Fix exported path
-
-## 1.0.0 - 2024-01-23
-### Added
-- Initial release
+- Hello

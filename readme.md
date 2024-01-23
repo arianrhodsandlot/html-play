@@ -14,7 +14,7 @@
 </p>
 
 <p align="center">
-  <img width="500" src="docs/screenshot.png" alt="screenshot" />
+  <img width="500" height="476" src="docs/screenshot.png" alt="screenshot" />
 </p>
 
 ## Features
