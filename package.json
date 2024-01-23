@@ -3,15 +3,15 @@
   "description": "Fetch and parse dynamic HTMLs with Node.js like a boss 🕶.",
   "version": "1.0.0",
   "type": "module",
-  "main": "./dist/src/index.js",
+  "main": "./dist/index.js",
   "scripts": {
     "build": "tsc",
     "dev": "tsx --test --test-only --no-deprecation",
     "lint": "eslint .",
     "test": "tsx --test --no-deprecation"
   },
-  "module": "./dist/src/index.js",
-  "types": "./dist/src/index.d.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "keywords": [],
   "author": {
     "name": "arianrhodsandlot",
