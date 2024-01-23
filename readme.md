@@ -101,6 +101,7 @@ npm i html-play
 ```
 If you want to use a browser to "run" the page before parsing, you'll need to install Chromium with Playwright.
 ```sh
+npm i playwright
 npx playwright install chromium
 ```
 

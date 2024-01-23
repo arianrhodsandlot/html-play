@@ -1,4 +1,4 @@
-import { type Browser, type LaunchOptions, type Page, chromium } from 'playwright'
+import { type Browser, type LaunchOptions, type Page } from 'playwright'
 import { defaultFetchUserAgent } from './lib/constants.js'
 import { buildDOM } from './lib/dom.js'
 import { Response } from './response.js'
@@ -122,15 +122,16 @@ export class Session {
       return browser
     }
 
-    // try {
-    //   await access(chromium.executablePath())
-    // } catch {
-    //   console.info('Playwright is not installed. Auto installiing...')
-    //   await promisify(spawn)('npx', ['playwright', 'install', 'chromium'], { stdio: 'inherit' })
-    // }
-
-    this.browserPromise = chromium.launch(launchOptions)
-    return await this.browserPromise
+    try {
+      const { chromium } = await import('playwright')
+      this.browserPromise = chromium.launch(launchOptions)
+      return await this.browserPromise
+    } catch (error) {
+      console.info(
+        'Playwright is not installed. Please install playwright with your package manager and then run `npx playwright install chromium` to enable browser support',
+      )
+      throw error
+    }
   }
 
   private async fetchWithBrowser(options: FetchWithBrowserOptions) {
